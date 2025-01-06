@@ -47,6 +47,7 @@ input[type="file"] {
 .thumbnails {
   display: flex;
   gap: 10px;
+  width: 20rem;
   overflow-x: auto;
   padding: 10px;
 }
@@ -67,12 +68,17 @@ input[type="file"] {
 
 .slideshow {
   width: 300px;
-  height: 400px; /* 3:4 aspect ratio */
-  border: 2px solid #ddd;
+  height: 400px;
+  border: 2px solid #070707;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #bbbbbb;
+  text-align: center;
+  color: #000000;
+  align-items: center;
+  align-content: center;
+  padding: 40px;
 }
 
 .slideshow img {
@@ -122,8 +128,37 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.alert {
+  display: none;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+  .alert {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  .alert img {
+    width: 300px;
+  }
+  .alert h2 {
+    font-family: 'Times New Roman', Times, serif;
+    width: 300px;
+    color: #00152c;
+  }
+  .alert p {
+    color: #555;
+    width: 300px;
+    font-family: monospace;
+  }
+  .container {
+    display: none;
+  }
   .slideshow {
     width: 250px;
     height: 333px; /* Maintain 3:4 aspect ratio */
