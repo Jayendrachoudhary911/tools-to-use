@@ -1,0 +1,136 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.drop-zone {
+  margin: 20px auto;
+  max-width: 90%;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+.drop-zone.drag-over {
+  border-color: #007BFF;
+  background-color: #e6f7ff;
+}
+
+/* Preview and Slideshow Section */
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.thumbnails img {
+  width: 75px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.1);
+}
+
+.slideshow {
+  width: 300px;
+  height: 400px; /* 3:4 aspect ratio */
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+}
+
+.slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.slideshow img.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pip-status {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  display: none;
+}
+
+.pip-status.hidden {
+  display: none;
+}
+
+.pip-status.visible {
+  display: block;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .slideshow {
+    width: 250px;
+    height: 333px; /* Maintain 3:4 aspect ratio */
+  }
+
+  .thumbnails img {
+    width: 60px;
+    height: 80px;
+  }
+}

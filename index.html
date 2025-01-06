@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow with PiP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Slideshow with Picture-in-Picture</h1>
+    <input type="file" id="imageInput" accept="image/*" multiple>
+    <div id="dropZone" class="drop-zone">Drag & Drop Images Here or Tap to Select</div>
+    <button id="pipButton" disabled>Start Slideshow in PiP/Full Screen</button>
+    
+    <div class="preview-section">
+      <div id="thumbnailPreview" class="thumbnails"></div>
+      <div id="slideshow" class="slideshow"></div>
+      <p id="pipStatus" class="pip-status hidden">Slideshow is currently shown in Picture-in-Picture/Full Screen mode</p>
+    </div>
+  </div>
+  <video id="slideshowVideo" controls style="display: none;"></video>
+  <script src="script.js"></script>
+</body>
+</html>
