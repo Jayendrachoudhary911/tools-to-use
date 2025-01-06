@@ -36,11 +36,13 @@ function handleFiles(files) {
 // Show the image in the slideshow
 function showImage(index) {
   currentIndex = index;
-  slideshow.innerHTML = ""; // Clear slideshow
-  const img = new Image();
-  img.src = images[index];
-  img.classList.add("active");
-  slideshow.appendChild(img);
+  if (!document.pictureInPictureElement) {
+    slideshow.innerHTML = ""; // Clear slideshow if not in PiP mode
+    const img = new Image();
+    img.src = images[index];
+    img.classList.add("active");
+    slideshow.appendChild(img);
+  }
 }
 
 // Create clickable thumbnails
@@ -90,31 +92,28 @@ function setupCanvas() {
   }, 4500); // 3-second interval
 }
 
-// Handle PiP or Full-Screen
+// Handle PiP or Full Screen
 pipButton.addEventListener("click", async () => {
-  if ("pictureInPictureEnabled" in document) {
-    if (document.pictureInPictureElement) {
-      await document.exitPictureInPicture();
-      pipStatus.classList.add("hidden");
-    } else {
-      try {
-        await slideshowVideo.requestPictureInPicture();
-        pipStatus.textContent = "Slideshow is shown in PiP.";
-        pipStatus.classList.remove("hidden");
-      } catch (error) {
-        console.error("Error starting PiP:", error);
-      }
-    }
-  } else if ("fullscreenEnabled" in document) {
-    // Fallback to full-screen mode for mobile devices
+  if (document.pictureInPictureElement) {
+    document.exitPictureInPicture();
+    pipStatus.classList.add("hidden");
+    showImage(currentIndex); // Resume showing in preview
+  } else if ("pictureInPictureEnabled" in document) {
     try {
-      await slideshowVideo.requestFullscreen();
-      pipStatus.textContent = "Slideshow is shown in Full-Screen mode.";
+      await slideshowVideo.requestPictureInPicture();
       pipStatus.classList.remove("hidden");
+      slideshow.innerHTML = ""; // Clear slideshow preview when in PiP
     } catch (error) {
-      console.error("Error starting Full-Screen mode:", error);
+      console.error("Error starting PiP:", error);
     }
   } else {
-    alert("Picture-in-Picture and Full-Screen mode are not supported on this device.");
+    // Mobile fallback: Full-screen mode
+    try {
+      await slideshowVideo.requestFullscreen();
+      pipStatus.textContent = "Slideshow is in Full Screen mode";
+      pipStatus.classList.remove("hidden");
+    } catch (error) {
+      console.error("Error starting Full Screen:", error);
+    }
   }
 });
